@@ -8,4 +8,13 @@ class NotesApplication : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         DaggerAppComponent.factory().create(applicationContext)
+
+    companion object {
+        lateinit var INSTANCE: NotesApplication
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        INSTANCE = this
+    }
 }
