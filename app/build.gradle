@@ -13,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
 
+        dataBinding {
+            enabled = true
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,6 +35,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     //  reason for writing lib version here is to get notified by lint for new version updates
     implementation 'com.google.dagger:dagger:2.24'
