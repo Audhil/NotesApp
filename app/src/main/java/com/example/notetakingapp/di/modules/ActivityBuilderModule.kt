@@ -1,7 +1,7 @@
 package com.example.notetakingapp.di.modules
 
 import com.example.notetakingapp.di.factories.ViewModelBuilder
-import com.example.notetakingapp.ui.MainActivity
+import com.example.notetakingapp.ui.list.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

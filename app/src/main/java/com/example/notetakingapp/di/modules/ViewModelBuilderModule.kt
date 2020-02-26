@@ -2,7 +2,7 @@ package com.example.notetakingapp.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.example.notetakingapp.di.factories.ViewModelKey
-import com.example.notetakingapp.ui.MainViewModel
+import com.example.notetakingapp.ui.list.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

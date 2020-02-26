@@ -1,4 +1,4 @@
-package com.example.notetakingapp.ui
+package com.example.notetakingapp.ui.list
 
 import com.example.notetakingapp.R
 import com.example.notetakingapp.databinding.ActivityMainBinding
