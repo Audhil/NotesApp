@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
+        <!--        Listing Activity-->
         <activity
             android:name=".ui.list.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -22,6 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--        Detail Activity-->
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -26,8 +26,10 @@
             android:text="@{note.title}"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_18sp"
+            android:transitionName="@string/app_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop"
             tools:text="Note title" />
 
         <TextView
@@ -36,8 +38,10 @@
             android:layout_height="wrap_content"
             android:text="@{note.content}"
             android:textSize="@dimen/text_size_14sp"
+            android:transitionName="@string/app_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/note_title"
+            tools:targetApi="lollipop"
             tools:text="lorum ipsum lasldfs askdfa;nsfn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

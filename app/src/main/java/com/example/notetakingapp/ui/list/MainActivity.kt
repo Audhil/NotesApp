@@ -1,10 +1,14 @@
 package com.example.notetakingapp.ui.list
 
 import android.os.Bundle
+import android.view.View
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import com.example.notetakingapp.R
 import com.example.notetakingapp.databinding.ActivityMainBinding
 import com.example.notetakingapp.ui.base.BaseLifeCycleActivity
+import com.example.notetakingapp.ui.detail.DetailActivity
 import com.example.notetakingapp.util.AppError
 import com.example.notetakingapp.util.showToast
 
@@ -50,8 +54,23 @@ class MainActivity : BaseLifeCycleActivity<ActivityMainBinding, MainViewModel>()
     private fun setUpRecyclerView() =
         viewDataBinding.notesRecyclerview.run {
             adapter = listAdapter
-            listAdapter.clickCallBack = {
-                println("clicked item: $it")
+            listAdapter.clickCallBack = { viewWrapper ->
+                val pair1: androidx.core.util.Pair<View, String> = Pair.create(
+                    viewWrapper.titleTxtView,
+                    getString(R.string.app_name)
+                )
+                val pair2: androidx.core.util.Pair<View, String> = Pair.create(
+                    viewWrapper.contentTxtView,
+                    getString(R.string.app_name)
+                )
+                val options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        this@MainActivity,
+                        pair1,
+                        pair2
+                    )
+//                startActivity(DetailActivity.newInstance(viewWrapper.noteModel), options.toBundle())
+                startActivity(DetailActivity.newInstance(viewWrapper.noteModel))
             }
         }
 

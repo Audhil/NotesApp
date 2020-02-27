@@ -1,6 +1,7 @@
 package com.example.notetakingapp.di.modules
 
 import com.example.notetakingapp.di.factories.ViewModelBuilder
+import com.example.notetakingapp.ui.detail.DetailActivity
 import com.example.notetakingapp.ui.list.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,4 +15,7 @@ abstract class ActivityBuilderModule {
         ]
     )
     abstract fun bindMainActivity(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun bindDetailActivity(): DetailActivity
 }

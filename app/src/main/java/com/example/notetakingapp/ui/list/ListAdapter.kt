@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notetakingapp.data.NoteModel
+import com.example.notetakingapp.data.wrapper.ViewWrapper
 import com.example.notetakingapp.databinding.EmptyListItemBinding
 import com.example.notetakingapp.databinding.NoteListItemBinding
 import com.example.notetakingapp.util.CallBack
@@ -20,7 +21,7 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         arrayListOf<NoteModel>()
     }
 
-    var clickCallBack: CallBack<NoteModel>? = null
+    var clickCallBack: CallBack<ViewWrapper>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -98,13 +99,19 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bindTo(
             pos: Int,
             noteModel: NoteModel,
-            clickCallBack: CallBack<NoteModel>?
+            clickCallBack: CallBack<ViewWrapper>?
         ) =
             itemBinding.run {
                 note = noteModel
                 executePendingBindings()
                 root.setOnClickListener {
-                    clickCallBack?.invoke(noteModel)
+                    clickCallBack?.invoke(
+                        ViewWrapper(
+                            noteModel,
+                            itemBinding.noteTitle,
+                            itemBinding.noteContent
+                        )
+                    )
                 }
             }
     }
