@@ -5,10 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notetakingapp.data.NoteModel
+import com.example.notetakingapp.databinding.EmptyListItemBinding
 import com.example.notetakingapp.databinding.NoteListItemBinding
 import com.example.notetakingapp.util.CallBack
+import com.example.notetakingapp.util.ConstantsUtil
 
 class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val viewTypes by lazy {
+        arrayOf(1, 2)
+    }
 
     private val items by lazy {
         arrayListOf<NoteModel>()
@@ -17,10 +23,35 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var clickCallBack: CallBack<NoteModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        ListViewHolder(NoteListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        when (viewType) {
+            viewTypes[0] ->
+                EmptyViewHolder(
+                    EmptyListItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+
+            viewTypes[1] ->
+                ListViewHolder(NoteListItemBinding.inflate(LayoutInflater.from(parent.context)))
+
+            else ->
+                EmptyViewHolder(
+                    EmptyListItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+        }
+
 
     override fun getItemCount(): Int =
-        items.size
+        if (items.isEmpty())
+            ConstantsUtil.ITEM_COUNT_1
+        else
+            items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
@@ -30,6 +61,13 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             else ->
                 Unit
         }
+
+    override fun getItemViewType(position: Int): Int =
+        if (items.isEmpty())
+            viewTypes[0]
+        else
+            viewTypes[1]
+
 
     fun addNotes(it: List<NoteModel>) {
         val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -46,7 +84,7 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
                 items[oldItemPosition] == it[newItemPosition]
         })
-        items.apply {
+        with(items) {
             clear()
             addAll(it)
         }
@@ -70,4 +108,8 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             }
     }
+
+    private class EmptyViewHolder(
+        emptyListItemBinding: EmptyListItemBinding
+    ) : RecyclerView.ViewHolder(emptyListItemBinding.root)
 }
