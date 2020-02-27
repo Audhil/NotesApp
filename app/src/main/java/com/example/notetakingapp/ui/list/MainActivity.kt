@@ -8,11 +8,13 @@ import androidx.lifecycle.Observer
 import com.example.notetakingapp.R
 import com.example.notetakingapp.databinding.ActivityMainBinding
 import com.example.notetakingapp.ui.base.BaseLifeCycleActivity
+import com.example.notetakingapp.ui.create.CreateActivity
 import com.example.notetakingapp.ui.detail.DetailActivity
 import com.example.notetakingapp.util.AppError
 import com.example.notetakingapp.util.showToast
 
-class MainActivity : BaseLifeCycleActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity :
+    BaseLifeCycleActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun getBindingVariable(): Int = 0
 
@@ -74,9 +76,8 @@ class MainActivity : BaseLifeCycleActivity<ActivityMainBinding, MainViewModel>()
             }
         }
 
-    private fun setUpFab() {
+    private fun setUpFab() =
         viewDataBinding.addFab.setOnClickListener {
-            "fab clicked".showToast()
+            startActivity(CreateActivity.newIntent())
         }
-    }
 }
