@@ -4,6 +4,8 @@
     <string name="title">Title</string>
     <string name="note">Note</string>
 
+    <string name="saved_on">Saved on</string>
+
     <string name="empty_text">No notes to view.</string>
     <string name="something_went_wrong">Something went wrong!</string>
 </resources>

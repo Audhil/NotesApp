@@ -2,7 +2,6 @@ package com.example.notetakingapp.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notetakingapp.data.NoteModel
 import com.example.notetakingapp.data.wrapper.ViewWrapper
@@ -71,25 +70,11 @@ class ListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     fun addNotes(it: List<NoteModel>) {
-        val diffUtil = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                items[oldItemPosition].timeStamp == it[newItemPosition].timeStamp
-
-            override fun getOldListSize(): Int =
-                items.size
-
-            override fun getNewListSize(): Int =
-                it.size
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                items[oldItemPosition] == it[newItemPosition]
-        })
         with(items) {
             clear()
             addAll(it)
         }
-        diffUtil.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
     private class ListViewHolder(

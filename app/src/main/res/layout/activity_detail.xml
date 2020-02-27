@@ -9,6 +9,8 @@
             name="note"
             type="com.example.notetakingapp.data.NoteModel" />
 
+        <import type="com.example.notetakingapp.util.AppExtnFuncsKt" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:text="@{AppExtnFuncsKt.formatTimeStamp(note.timeStamp)}"
             android:textSize="@dimen/text_size_12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/note_title"

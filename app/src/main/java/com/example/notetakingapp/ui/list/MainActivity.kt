@@ -44,6 +44,11 @@ class MainActivity :
         setUpFab()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.triggerLiveData.value = true
+    }
+
     private fun setUpDataObservers() =
         viewModel.notesLiveData.observe(this, Observer {
             listAdapter.addNotes(it)

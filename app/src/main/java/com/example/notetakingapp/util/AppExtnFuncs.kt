@@ -3,9 +3,16 @@ package com.example.notetakingapp.util
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
+import android.text.format.DateFormat
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.notetakingapp.NotesApplication
+import com.example.notetakingapp.R
+import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 inline fun Any.showVLog(log: () -> String) =
     NLog.v("---" + this::class.java.simpleName, log())
@@ -79,3 +86,29 @@ fun Any.showToast(
 }
 
 typealias CallBack<T> = (T) -> Unit
+
+fun TextInputEditText.addTextWatcher(block: (String) -> Unit) =
+    this.addTextChangedListener(object : TextWatcher {
+
+        override fun afterTextChanged(s: Editable) {}
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(
+            s: CharSequence,
+            start: Int,
+            before: Int,
+            count: Int
+        ) = block.invoke(s.toString())
+    })
+
+private val calendar by lazy {
+    Calendar.getInstance(Locale.ROOT)
+}
+
+fun Long.formatTimeStamp(): String {
+    calendar.timeInMillis = this
+    return NotesApplication.INSTANCE.getString(R.string.saved_on) +
+            ConstantsUtil.BLANK_SPACE +
+            DateFormat.format("dd MMM yyyy, h:mm a", calendar).toString()
+}

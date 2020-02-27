@@ -2,6 +2,7 @@ package com.example.notetakingapp.ui.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.notetakingapp.data.NoteModel
 import com.example.notetakingapp.repository.DataRepository
 import com.example.notetakingapp.ui.base.BaseViewModel
@@ -16,7 +17,11 @@ constructor(
 
     val errorLiveData: LiveData<AppError> = dataRepository.errorLiveData
 
-    val notesLiveData: LiveData<List<NoteModel>> = MutableLiveData<List<NoteModel>>().apply {
-        value = dataRepository.getNotes()
+    val triggerLiveData = MutableLiveData<Boolean>()
+
+    val notesLiveData: LiveData<List<NoteModel>> = Transformations.switchMap(triggerLiveData) {
+        MutableLiveData<List<NoteModel>>().apply {
+            value = dataRepository.getNotes()
+        }
     }
 }

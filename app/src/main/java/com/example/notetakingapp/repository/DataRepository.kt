@@ -1,6 +1,7 @@
 package com.example.notetakingapp.repository
 
 import com.example.notetakingapp.data.NoteModel
+import com.example.notetakingapp.util.AppError
 import com.example.notetakingapp.util.ErrorLiveData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -34,9 +35,11 @@ constructor(
         arrayListOf<NoteModel>()
     }
 
-    override fun addNote(note: NoteModel) {
-        notesList.add(note)
+    override fun addNote(note: NoteModel?) {
+        note?.run {
+            notesList.add(this)
+        } ?: errorLiveData.setAppError(AppError.NOTE_NOT_AVAILABLE)
     }
 
-    override fun getNotes(): List<NoteModel> = fakeData
+    override fun getNotes(): List<NoteModel> = notesList    //  fakeData
 }
