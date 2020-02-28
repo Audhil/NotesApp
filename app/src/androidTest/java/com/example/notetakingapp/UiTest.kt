@@ -1,10 +1,11 @@
 package com.example.notetakingapp
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.RootMatchers.withDecorView
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -25,7 +26,7 @@ class UiTest {
     val rule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun happyCaseTest() {
+    fun fullAppFlowTest() {
         //  main activity
         onView(withId(R.id.add_fab)).run {
             check(matches(isDisplayed()))
@@ -68,10 +69,21 @@ class UiTest {
             check(matches(withText(ConstantsUtil.SAMPLE_NOTE)))
         }
 
-        //  main activity
         pressBack()
+
+        //  main activity
         onView(withId(R.id.notes_recyclerview)).run {
-            check(matches(hasDescendant(withText(containsString("Jack and jill!")))))
+            check(matches(hasDescendant(withText(containsString(ConstantsUtil.SAMPLE_TITLE)))))
+            perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        }
+
+        //  detail activity
+        onView(withId(R.id.note_title)).run {
+            check(matches(withText(ConstantsUtil.SAMPLE_TITLE)))
+        }
+
+        onView(withId(R.id.note_content)).run {
+            check(matches(withText(ConstantsUtil.SAMPLE_NOTE)))
         }
     }
 }
