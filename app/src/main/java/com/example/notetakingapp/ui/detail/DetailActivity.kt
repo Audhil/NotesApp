@@ -38,8 +38,4 @@ class DetailActivity : BaseActivity() {
             executePendingBindings()
         }
     }
-
-//    override fun onBackPressed() {
-//        ActivityCompat.finishAfterTransition(this)
-//    }
 }

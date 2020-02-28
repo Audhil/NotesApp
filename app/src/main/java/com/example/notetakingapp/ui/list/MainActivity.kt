@@ -1,9 +1,6 @@
 package com.example.notetakingapp.ui.list
 
 import android.os.Bundle
-import android.view.View
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notetakingapp.R
@@ -63,21 +60,6 @@ class MainActivity :
         viewDataBinding.notesRecyclerview.run {
             adapter = listAdapter
             listAdapter.clickCallBack = { viewWrapper ->
-                val pair1: androidx.core.util.Pair<View, String> = Pair.create(
-                    viewWrapper.titleTxtView,
-                    getString(R.string.app_name)
-                )
-                val pair2: androidx.core.util.Pair<View, String> = Pair.create(
-                    viewWrapper.contentTxtView,
-                    getString(R.string.app_name)
-                )
-                val options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        this@MainActivity,
-                        pair1,
-                        pair2
-                    )
-//                startActivity(DetailActivity.newInstance(viewWrapper.noteModel), options.toBundle())
                 startActivity(DetailActivity.newInstance(viewWrapper.noteModel))
             }
             addOnScrollListener(object : RecyclerView.OnScrollListener() {

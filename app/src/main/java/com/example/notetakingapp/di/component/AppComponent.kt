@@ -3,7 +3,6 @@ package com.example.notetakingapp.di.component
 import android.content.Context
 import com.example.notetakingapp.NotesApplication
 import com.example.notetakingapp.di.modules.ActivityBuilderModule
-import com.example.notetakingapp.di.modules.OtherModule
 import com.example.notetakingapp.di.modules.ViewModelBuilderModule
 import dagger.BindsInstance
 import dagger.Component
@@ -16,8 +15,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ActivityBuilderModule::class,
-        ViewModelBuilderModule::class,
-        OtherModule::class
+        ViewModelBuilderModule::class
     ]
 )
 interface AppComponent : AndroidInjector<NotesApplication> {

@@ -28,7 +28,6 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_22sp"
             android:textStyle="bold"
-            android:transitionName="@string/app_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:targetApi="lollipop"
@@ -74,7 +73,6 @@
                 android:scrollbars="vertical"
                 android:text="@{note.content}"
                 android:textSize="@dimen/text_size_14sp"
-                android:transitionName="@string/app_name"
                 tools:targetApi="lollipop"
                 tools:text="IMost of the time when you are using lambdas, you are not even doing functional programming, because you often are violating one key rule of functional programming: no side effects.For example:
                 collection.forEach(System.out::println);is of course very cute to use, and is (wow) 10 characters shorter than:for (Object o : collection) System.out.println(o);but this is not functional programming because it has side effects.
