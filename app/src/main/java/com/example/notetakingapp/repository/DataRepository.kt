@@ -41,13 +41,5 @@ constructor(
         } ?: errorLiveData.setAppError(AppError.NOTE_NOT_AVAILABLE)
     }
 
-//    override fun getNotes(): List<NoteModel> = notesList.sortedByDescending { it.timeStamp }
-
-    override fun getNotes(): List<NoteModel> = arrayListOf<NoteModel>().apply {
-        addAll(fakeData)
-        addAll(fakeData)
-        addAll(fakeData)
-        addAll(fakeData)
-        addAll(fakeData)
-    }
+    override fun getNotes(): List<NoteModel> = notesList.sortedByDescending { it.timeStamp }
 }
