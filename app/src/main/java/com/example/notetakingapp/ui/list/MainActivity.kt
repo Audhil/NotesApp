@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.example.notetakingapp.R
 import com.example.notetakingapp.databinding.ActivityMainBinding
 import com.example.notetakingapp.ui.base.BaseLifeCycleActivity
@@ -79,6 +80,19 @@ class MainActivity :
 //                startActivity(DetailActivity.newInstance(viewWrapper.noteModel), options.toBundle())
                 startActivity(DetailActivity.newInstance(viewWrapper.noteModel))
             }
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    when (newState) {
+                        RecyclerView.SCROLL_STATE_IDLE ->
+                            viewDataBinding.addFab.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+
+                        else ->
+                            viewDataBinding.addFab.animate().scaleX(0f).scaleY(0f).setDuration(100).start()
+                    }
+                }
+            })
         }
 
     private fun setUpFab() =

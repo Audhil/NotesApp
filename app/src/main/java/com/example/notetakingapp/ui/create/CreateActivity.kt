@@ -13,6 +13,7 @@ import com.example.notetakingapp.ui.base.BaseLifeCycleActivity
 import com.example.notetakingapp.ui.detail.DetailActivity
 import com.example.notetakingapp.util.AppError
 import com.example.notetakingapp.util.addTextWatcher
+import com.example.notetakingapp.util.animeListener
 import com.example.notetakingapp.util.showToast
 
 class CreateActivity :
@@ -64,17 +65,24 @@ class CreateActivity :
                     timeStamp = System.currentTimeMillis()
                 )
                 viewModel.addNote(note = noteModel)
+                getString(R.string.note_saved).showToast()
                 startActivity(DetailActivity.newInstance(noteModel))
                 finish()
             }
         }
 
     private fun setFabVisibility() =
-        with(viewDataBinding) {
-            saveFab.visibility =
-                if (TextUtils.isEmpty(titleEditText.text) || TextUtils.isEmpty(noteEditText.text))
-                    View.GONE
-                else
-                    View.VISIBLE
+        with(viewDataBinding.saveFab) {
+            clearAnimation()
+            if (TextUtils.isEmpty(viewDataBinding.titleEditText.text) ||
+                TextUtils.isEmpty(viewDataBinding.noteEditText.text)
+            )
+                this.animate().scaleX(0f).scaleY(0f).setDuration(100).animeListener(endCallBack = {
+                    visibility = View.GONE
+                }).start()
+            else
+                this.animate().scaleX(1f).scaleY(1f).setDuration(100).animeListener(startCallBack = {
+                    visibility = View.VISIBLE
+                }).start()
         }
 }

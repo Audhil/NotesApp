@@ -1,5 +1,6 @@
 package com.example.notetakingapp.util
 
+import android.animation.Animator
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -7,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.ViewPropertyAnimator
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.notetakingapp.NotesApplication
@@ -106,9 +108,45 @@ private val calendar by lazy {
     Calendar.getInstance(Locale.ROOT)
 }
 
-fun Long.formatTimeStamp(): String {
-    calendar.timeInMillis = this
-    return NotesApplication.INSTANCE.getString(R.string.saved_on) +
-            ConstantsUtil.BLANK_SPACE +
-            DateFormat.format("dd MMM yyyy, h:mm a", calendar).toString()
+fun Long?.formatTimeStamp(): String {
+    this?.run {
+        calendar.timeInMillis = this
+        return NotesApplication.INSTANCE.getString(R.string.saved_on) +
+                ConstantsUtil.BLANK_SPACE +
+                DateFormat.format("dd MMM yyyy, h:mm a", calendar).toString()
+    }
+    return ConstantsUtil.EMPTY
+}
+
+fun String?.ellipsisText(): String? {
+    this?.run {
+        return if (this.length > 100)
+            this.substring(0, 100) + ConstantsUtil.ELLIPSIS
+        else
+            this
+    }
+    return null
+}
+
+fun ViewPropertyAnimator.animeListener(
+    startCallBack: ((Unit) -> Unit)? = null,
+    endCallBack: ((Unit) -> Unit)? = null
+): ViewPropertyAnimator {
+
+    this.setListener(object : Animator.AnimatorListener {
+        override fun onAnimationRepeat(animation: Animator?) {
+        }
+
+        override fun onAnimationEnd(animation: Animator?) {
+            endCallBack?.invoke(Unit)
+        }
+
+        override fun onAnimationCancel(animation: Animator?) {
+        }
+
+        override fun onAnimationStart(animation: Animator?) {
+            startCallBack?.invoke(Unit)
+        }
+    })
+    return this
 }

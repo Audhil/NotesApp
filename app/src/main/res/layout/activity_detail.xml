@@ -38,6 +38,7 @@
             android:id="@+id/note_timestamp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:text="@{AppExtnFuncsKt.formatTimeStamp(note.timeStamp)}"

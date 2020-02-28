@@ -9,40 +9,49 @@
             name="note"
             type="com.example.notetakingapp.data.NoteModel" />
 
+        <import type="com.example.notetakingapp.util.AppExtnFuncsKt" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:padding="20dp">
+        android:foreground="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/note_title"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/note_base_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{note.title}"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_18sp"
-            android:transitionName="@string/app_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:text="Note title" />
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/note_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{note.content}"
-            android:textSize="@dimen/text_size_14sp"
-            android:transitionName="@string/app_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/note_title"
-            tools:targetApi="lollipop"
-            tools:text="lorum ipsum lasldfs askdfa;nsfn" />
+            <TextView
+                android:id="@+id/note_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{note.title}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_18sp"
+                android:textStyle="bold"
+                android:transitionName="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop"
+                tools:text="Note title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/note_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{AppExtnFuncsKt.ellipsisText(note.content)}"
+                android:textSize="@dimen/text_size_14sp"
+                android:transitionName="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note_title"
+                tools:targetApi="lollipop"
+                tools:text="lorum ipsum lasldfs askdfa;nsfn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
