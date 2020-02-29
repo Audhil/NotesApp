@@ -9,7 +9,7 @@ I've covered the following in the app,
 # Android Data-Binding
 # Dagger2 - for dependency injection
 # Kotlin Extension functions, Kotlin HigherOrder functions
-# wrote unit test cases & UI test case.
+# wrote unit test cases & UI test case using mockk & espresso respectively
 
 source code is available @
 https://github.com/Audhil/NotesApp
